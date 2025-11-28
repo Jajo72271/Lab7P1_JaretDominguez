@@ -54,17 +54,32 @@ public class Lab_7P1JaretDominguez {
         } while (opcion != 4);
 
     }
-    
-      public static void Ejercicio1(Scanner lea) {
-          Scanner leer = new Scanner(System.in);
-          System.out.println("ingrese el valor de la matriz");
-          System.out.println("debe ser mayor que 3 e impar");
-        System.out.println(": ");
-             int  tamanofilas = leer.nextInt();
-             int tamanocolumnas = tamanofilas;           
-        int[][] matriz = new int[tamanofilas][tamanocolumnas];
-        imprimirtabla(matriz);
 
+    public static void Ejercicio1(Scanner lea) {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("ingrese el valor de la matriz");
+        System.out.println("debe ser mayor que 3 ");
+        System.out.println(": ");
+        int tamanofilas = leer.nextInt();
+        if (tamanofilas > 3) {
+            int tamanocolumnas = tamanofilas;
+            int[][] matriz = new int[tamanofilas][tamanocolumnas];
+            imprimirtabla(matriz);
+            int total = recorrerTabla1(matriz) + recorrerTabla12(matriz) + recorrerTabla13(matriz);
+            System.out.println("el total del Z invertido es: " + total);
+            int total2 = recorrerTabla1(matriz) + recorrerTabla22(matriz) + recorrerTabla13(matriz);
+            System.out.println("el total del Z normal es: " + total2);
+            int diferencia = Math.abs(21 - total);
+            int diferencia2 = Math.abs(21 - total2);
+            int verificacion = diferencia - diferencia2;
+            if (verificacion > 0) {
+                System.out.println("la Z Normal es mas cercano a 21");
+            } else {
+                System.out.println("la Z invertido es mas cercano a 21");
+            }
+
+        }
+        System.out.println("debe ser mayor a 3");
     }
 
     public static void imprimirtabla(int[][] matriz) {
@@ -80,16 +95,69 @@ public class Lab_7P1JaretDominguez {
         }
 
     }
+     public static int recorrerTabla1(int[][] matriz) {
+         int acumulador = 0;
+        for (int i = 0; i < matriz[0].length; i++) {
+            int numero = matriz[0][i];
+            acumulador = numero + acumulador;
+        }
+         
+         return acumulador;
+     }
+        public static int recorrerTabla12(int[][] matriz) {
+         int acumulador = 0;
+        for (int i = 0; i < matriz[0].length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                if (j==i) {
+                    if (i!=0&&i!=matriz.length-1) {
+                        int numero = matriz [i][j];
+                    acumulador = numero + acumulador;
+                        
+                    }
+                   
+                }
+                
+                
+            }
+            
+        }
+        
+        return acumulador;
+    }
+        
+
+    public static int recorrerTabla13(int[][] matriz) {
+        int acumulador = 0;
+        for (int i = 0; i < matriz[0].length; i++) {
+            int numero = matriz[matriz.length-1][i];
+            acumulador = numero + acumulador;
+
+        }
+        
+        return acumulador;
+    }
+    
+    public static int recorrerTabla22(int[][] matriz) {
+        int acumulador = 0;
+        for (int i = 0; i < matriz[0].length-1; i++) {
+            for (int j = 0; j < matriz.length-1; j++) {
+                if ((matriz.length-1)-i == j) {
+                    if (i!=0 && i!=matriz.length-1) {
+                         int numero = matriz [i][j];
+                    acumulador = numero + acumulador;
+                    }
+                }
+            }
+        }
+    
+    return acumulador;
+    }
 
        public static void imprimirTabla(boolean[][] tabla) {
         System.out.println("Tabla resultante:");
         System.out.println("p  q  r");
         for (int i = 0; i < tabla.length; i++) {
-            System.out.println(
-                    (tabla[i][0] ? 1 : 0) + "  "
-                    + (tabla[i][1] ? 1 : 0) + "  "
-                    + (tabla[i][2] ? 1 : 0)
-            );
+            System.out.println( (tabla[i][0] ? 1 : 0) + "  " + (tabla[i][1] ? 1 : 0) + "  " + (tabla[i][2] ? 1 : 0) );
         }
     }
 
@@ -152,6 +220,7 @@ public class Lab_7P1JaretDominguez {
             System.out.println((matriz[i][0] ? 1 : 0) + "  " + (matriz[i][1] ? 1 : 0));
         }
     }
+   
     
 
     //String[][] tablero = new String[][];
